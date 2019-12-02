@@ -106,6 +106,8 @@ public class AuditModelTests {
   public void confirmReads() throws Exception {
     AuditorResults results = new AuditorResultsModelXpp3Reader().read(new FileInputStream(path.toString()));
 
+    assertEquals("Name should be Testing Audit", "Testing Audit", results.getName());
+
     int headers = results.getDescriptionHeaders().size();
     assertEquals("size of description headers should be 2", 2, headers);
     results.getResults().parallelStream().forEach(result -> {

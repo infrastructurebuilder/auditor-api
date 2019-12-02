@@ -28,6 +28,13 @@
       <version>1.0.0+</version>
       <fields>
         <field>
+          <name>name</name>
+          <description>The name of this audit report.</description>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <type>String</type>
+        </field>
+        <field>
           <name>results</name>
           <version>1.0.0+</version>
           <required>true</required>
