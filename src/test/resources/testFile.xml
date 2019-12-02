@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuditResults xsi:schemaLocation="https://resources.infrastructurebuilder.org/IBAuditorResults/${apiVersion} https://resources.infrastructurebuilder.org/xsd/IBAuditorResults-${apiVersion}"
+    xmlns="https://resources.infrastructurebuilder.org/IBAuditorResults/${apiVersion}"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <results>
+    <result>
+      <reported>true</reported>
+      <descriptions>
+        <description>A</description>
+        <description>B</description>
+      </descriptions>
+    </result>
+    <result>
+      <reported>true</reported>
+      <auditFailure>true</auditFailure>
+      <errored>true</errored>
+      <descriptions>
+        <description>A</description>
+        <description>B</description>
+      </descriptions>
+    </result>
+    <result>
+      <reported>true</reported>
+      <auditFailure>true</auditFailure>
+      <descriptions>
+        <description>A</description>
+        <description>B</description>
+      </descriptions>
+    </result>
+  </results>
+  <descriptionHeaders>
+    <descriptionHeader>Example</descriptionHeader>
+    <descriptionHeader>Headers</descriptionHeader>
+  </descriptionHeaders>
+</AuditResults>
