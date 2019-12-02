@@ -37,6 +37,20 @@
           </association>
         </field>
         <field>
+          <name>confidentialityStatement</name>
+          <description>An optional statement of confidentiality.</description>
+          <version>1.0.0+</version>
+          <required>false</required>
+          <type>String</type>
+        </field>
+        <field>
+          <name>introduction</name>
+          <description>An optional introductory statement.</description>
+          <version>1.0.0+</version>
+          <required>false</required>
+          <type>String</type>
+        </field>
+        <field>
           <name>descriptionHeaders</name>
           <version>1.0.0+</version>
           <required>true</required>
@@ -69,14 +83,14 @@
           <version>1.0.0+</version>
           <required>true</required>
           <description>
-          Should this result be included in the report?
+            Should this result be included in the report?
 
-          Any check that would provide a false negative, or false positive,
-          in environments where that can be predicted (trust me, it happens)
-          should be skipped during a report.
+            Any check that would provide a false negative, or false positive,
+            in environments where that can be predicted (trust me, it happens)
+            should be skipped during a report.
 
-          If you do not need to skip any results when reporting, feel free
-          to set it to true all the time.
+            If you do not need to skip any results when reporting, feel free
+            to set it to true all the time.
           </description>
           <type>boolean</type>
         </field>

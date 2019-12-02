@@ -16,12 +16,17 @@
 package org.infrastructurebuilder.auditor.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.StringWriter;
 import java.nio.file.Path;
+import java.util.Arrays;
 import java.util.UUID;
 
 import org.infrastructurebuilder.auditor.model.io.xpp3.AuditorResultsModelXpp3Reader;
+import org.infrastructurebuilder.auditor.model.io.xpp3.AuditorResultsModelXpp3Writer;
 import org.infrastructurebuilder.util.IBUtils;
 import org.infrastructurebuilder.util.config.WorkingPathSupplier;
 import org.junit.After;
@@ -46,6 +51,58 @@ public class AuditModelTests {
   }
 
   @Test
+  public void confirmWrites() throws Exception {
+    AuditResult test = new AuditResult();
+    String fakeDescription = "This description will get added, then removed.";
+    String realDescription = "This description will stay in!";
+    test.addDescription(fakeDescription);
+    test.removeDescription(fakeDescription);
+    test.addDescription(realDescription);
+
+    AuditResult test2 = new AuditResult();
+    test2.setAuditFailure(true);
+    test2.setErrored(true);
+    test2.setReported(true);
+    test2.setDescriptions(Arrays.asList(realDescription));
+
+    AuditResult unused = new AuditResult();
+
+    AuditorResults results = new AuditorResults();
+
+    assertNotNull("Modello's gets are eerily typesafe, in places: Results", results.getResults());
+    assertNotNull("Modello's gets are eerily typesafe, in places: Description Headers",
+        results.getDescriptionHeaders());
+
+    results.addResult(test);
+    results.addResult(test2);
+    results.addResult(unused);
+    results.removeResult(unused);
+
+    results.addDescriptionHeader(realDescription);
+    results.addDescriptionHeader(fakeDescription);
+    results.removeDescriptionHeader(fakeDescription);
+
+    Path p = wps.getRoot().resolve("temp.xml");
+    AuditorResultsModelXpp3Writer w = new AuditorResultsModelXpp3Writer();
+    w.setFileComment("This is a test file!");
+    w.write(new FileOutputStream(p.toString()), results);
+
+    AuditorResults fromRead = new AuditorResultsModelXpp3Reader().read(new FileInputStream(p.toString()));
+    fromRead.getResults().parallelStream().forEach(result -> {
+      assertEquals("should have only one result header", 1, result.getDescriptions().size());
+    });
+
+    assertEquals("Should show 1 failures in list", 1,
+        fromRead.getResults().parallelStream().filter(r -> r.isAuditFailure()).count());
+
+    assertEquals("Should show 1 errors in list", 1,
+        fromRead.getResults().parallelStream().filter(r -> r.isErrored()).count());
+
+    assertEquals("Should be reporting exactly one result", 1,
+        fromRead.getResults().parallelStream().filter(r -> r.isReported()).count());
+  }
+
+  @Test
   public void confirmReads() throws Exception {
     AuditorResults results = new AuditorResultsModelXpp3Reader().read(new FileInputStream(path.toString()));
 
@@ -63,5 +120,13 @@ public class AuditModelTests {
 
     assertEquals("Should be reporting all results", 3,
         results.getResults().parallelStream().filter(r -> r.isReported()).count());
+  }
+
+  @Test
+  public void testNonFileIO() throws Exception {
+    StringWriter sw = new StringWriter();
+    AuditorResults fileResults = new AuditorResultsModelXpp3Reader().read(new FileInputStream(path.toString()));
+    new AuditorResultsModelXpp3Writer().write(sw, fileResults);
+
   }
 }
