@@ -46,15 +46,15 @@
           <name>timestampStart</name>
           <version>1.0.0+</version>
           <required>true</required>
-          <description>The initial timestamp of this audit, expressed in epoch seconds</description>
-          <type>long</type>
+          <description>The initial timestamp of this audit</description>
+          <type>Date</type>
         </field>
         <field>
           <name>timestampEnd</name>
           <version>1.0.0+</version>
           <required>true</required>
-          <description>The ending timestamp of this audit, expressed in epoch seconds</description>
-          <type>long</type>
+          <description>The ending timestamp of this audit</description>
+          <type>Date</type>
         </field>
         <field>
           <name>results</name>
@@ -127,15 +127,15 @@
           <name>timestampStart</name>
           <version>1.0.0+</version>
           <required>true</required>
-          <description>The initial timestamp of this check, expressed in epoch seconds</description>
-          <type>long</type>
+          <description>The initial timestamp of this check</description>
+          <type>Date</type>
         </field>
         <field>
           <name>timestampEnd</name>
           <version>1.0.0+</version>
           <required>true</required>
-          <description>The ending timestamp of this check, expressed in epoch seconds</description>
-          <type>long</type>
+          <description>The ending timestamp of this check</description>
+          <type>Date</type>
         </field>
         <field>
           <name>auditFailure</name>

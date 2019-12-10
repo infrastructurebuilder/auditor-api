@@ -17,6 +17,7 @@ package org.infrastructurebuilder.auditor.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -58,8 +59,8 @@ public class AuditModelTests {
     test.addDescription(fakeDescription);
     test.removeDescription(fakeDescription);
     test.addDescription(realDescription);
-    test.setTimestampEnd(1);
-    test.setTimestampStart(0);
+    test.setTimestampEnd(new java.util.Date());
+    test.setTimestampStart(new java.util.Date());
 
     AuditResult test2 = new AuditResult();
     test2.setAuditFailure(true);
@@ -75,8 +76,8 @@ public class AuditModelTests {
     assertNotNull("Modello's gets are eerily typesafe, in places: Description Headers",
         results.getDescriptionHeaders());
 
-    results.setTimestampEnd(1);
-    results.setTimestampStart(2);
+    results.setTimestampEnd(new java.util.Date());
+    results.setTimestampStart(new java.util.Date());
 
     results.addResult(test);
     results.addResult(test2);
@@ -128,7 +129,8 @@ public class AuditModelTests {
     assertEquals("Should be reporting all results", 3,
         results.getResults().parallelStream().filter(r -> r.isReported()).count());
 
-    assertEquals("Should be four epoch milliseconds!", 4, results.getTimestampEnd() - results.getTimestampStart());
+    assertTrue("End time should be greater than start time",
+        results.getTimestampEnd().compareTo(results.getTimestampStart()) > 0);
   }
 
   @Test

@@ -5,22 +5,22 @@
   <name>Testing Audit</name>
   <confidentialityStatement>Anyone can read this test report; it is part of an open source project.</confidentialityStatement>
   <introduction>This is an example file used in testing to confirm that the underlying Reader is working.</introduction>
-  <timestampStart>0</timestampStart>
-  <timestampEnd>4</timestampEnd>
+  <timestampStart>2019-12-10T14:54:46.728</timestampStart>
+  <timestampEnd>2019-12-10T14:54:46.800</timestampEnd>
   <results>
     <result>
+      <timestampStart>2019-12-10T14:54:46.728</timestampStart>
+      <timestampEnd>2019-12-10T14:54:46.800</timestampEnd>
       <reported>true</reported>
-      <timestampStart>0</timestampStart>
-      <timestampEnd>1</timestampEnd>
       <descriptions>
         <description>A</description>
         <description>B</description>
       </descriptions>
     </result>
     <result>
+      <timestampStart>2019-12-10T14:54:46.728</timestampStart>
+      <timestampEnd>2019-12-10T14:54:46.800</timestampEnd>
       <reported>true</reported>
-      <timestampStart>0</timestampStart>
-      <timestampEnd>1</timestampEnd>
       <auditFailure>true</auditFailure>
       <errored>true</errored>
       <descriptions>
@@ -29,9 +29,9 @@
       </descriptions>
     </result>
     <result>
+      <timestampStart>2019-12-10T14:54:46.728</timestampStart>
+      <timestampEnd>2019-12-10T14:54:46.800</timestampEnd>
       <reported>true</reported>
-      <timestampStart>0</timestampStart>
-      <timestampEnd>1</timestampEnd>
       <auditFailure>true</auditFailure>
       <descriptions>
         <description>A</description>
