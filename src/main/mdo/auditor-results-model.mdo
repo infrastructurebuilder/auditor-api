@@ -43,6 +43,20 @@
           <defaultValue><![CDATA[" + java.util.UUID.randomUUID().toString() + "]]></defaultValue>
         </field>
         <field>
+          <name>timestampStart</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <description>The initial timestamp of this audit, expressed in epoch seconds</description>
+          <type>long</type>
+        </field>
+        <field>
+          <name>timestampEnd</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <description>The ending timestamp of this audit, expressed in epoch seconds</description>
+          <type>long</type>
+        </field>
+        <field>
           <name>results</name>
           <version>1.0.0+</version>
           <required>true</required>

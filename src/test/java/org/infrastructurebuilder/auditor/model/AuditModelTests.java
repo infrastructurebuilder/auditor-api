@@ -75,6 +75,9 @@ public class AuditModelTests {
     assertNotNull("Modello's gets are eerily typesafe, in places: Description Headers",
         results.getDescriptionHeaders());
 
+    results.setTimestampEnd(1);
+    results.setTimestampStart(2);
+
     results.addResult(test);
     results.addResult(test2);
     results.addResult(unused);
@@ -124,6 +127,8 @@ public class AuditModelTests {
 
     assertEquals("Should be reporting all results", 3,
         results.getResults().parallelStream().filter(r -> r.isReported()).count());
+
+    assertEquals("Should be four epoch milliseconds!", 4, results.getTimestampEnd() - results.getTimestampStart());
   }
 
   @Test

@@ -31,7 +31,7 @@
       Note that the missed pieces are unused portions of the generated Xpp3Reader.
       The API and writer have 100% coverage.
     -->
-    <test.coverage.percentage.required>67</test.coverage.percentage.required>
+    <test.coverage.percentage.required>69</test.coverage.percentage.required>
   </properties>
 
   <dependencies>
