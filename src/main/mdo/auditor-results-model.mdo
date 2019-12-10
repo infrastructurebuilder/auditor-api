@@ -35,6 +35,14 @@
           <type>String</type>
         </field>
         <field>
+          <name>id</name>
+          <description>The unique identifier of this audit report.</description>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <type>String</type>
+          <defaultValue><![CDATA[" + java.util.UUID.randomUUID().toString() + "]]></defaultValue>
+        </field>
+        <field>
           <name>results</name>
           <version>1.0.0+</version>
           <required>true</required>
@@ -100,6 +108,20 @@
             to set it to true all the time.
           </description>
           <type>boolean</type>
+        </field>
+        <field>
+          <name>timestampStart</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <description>The initial timestamp of this check, expressed in epoch seconds</description>
+          <type>long</type>
+        </field>
+        <field>
+          <name>timestampEnd</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <description>The ending timestamp of this check, expressed in epoch seconds</description>
+          <type>long</type>
         </field>
         <field>
           <name>auditFailure</name>

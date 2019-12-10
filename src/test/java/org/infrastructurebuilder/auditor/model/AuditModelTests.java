@@ -58,6 +58,8 @@ public class AuditModelTests {
     test.addDescription(fakeDescription);
     test.removeDescription(fakeDescription);
     test.addDescription(realDescription);
+    test.setTimestampEnd(1);
+    test.setTimestampStart(0);
 
     AuditResult test2 = new AuditResult();
     test2.setAuditFailure(true);
