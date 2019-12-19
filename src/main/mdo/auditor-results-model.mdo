@@ -20,7 +20,7 @@
 
   <classes>
     <!-- MODEL -->
-    <class xml.tagName="AuditResults" rootElement="true">
+    <class rootElement="true">
       <name>AuditorResults</name>
       <description>Encapsulator of all results from an audit report run, and their HTML table header.</description>
       <version>1.0.0+</version>
@@ -100,7 +100,7 @@
         </field>
       </fields>
     </class>
-    <class xml.tagName="AuditResult">
+    <class>
       <name>AuditResult</name>
       <description>The result of a single audit check.</description>
       <version>1.0.0+</version>
