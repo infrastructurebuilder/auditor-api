@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<AuditResults xsi:schemaLocation="https://resources.infrastructurebuilder.org/IBAuditorResults/${apiVersion} https://resources.infrastructurebuilder.org/xsd/IBAuditorResults-${apiVersion}"
+    xmlns="https://resources.infrastructurebuilder.org/IBAuditorResults/${apiVersion}"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <name>Testing Audit</name>
+  <confidentialityStatement>Anyone can read this test report; it is part of an open source project.</confidentialityStatement>
+  <introduction>This is an example file used in testing to confirm that the underlying Reader is working.</introduction>
+  <timestampStart>2019-12-10T14:54:46.728</timestampStart>
+  <jeff>2019-12-10T14:54:46.800</jeff>
+</AuditResults>
