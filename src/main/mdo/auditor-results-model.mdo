@@ -1,0 +1,225 @@
+<model xmlns="http://codehaus-plexus.github.io/MODELLO/1.8.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://codehaus-plexus.github.io/MODELLO/1.8.0 http://codehaus-plexus.github.io/modello/xsd/modello-1.8.0.xsd"
+  xml.namespace="https://resources.infrastructurebuilder.org/IBAuditorResults/${apiVersion}"
+  xml.schemaLocation="https://resources.infrastructurebuilder.org/xsd/IBAuditorResults-${apiVersion}"
+  xsd.namespace="https://resources.infrastructurebuilder.org/IBAuditorResults/${apiVersion}"
+  xsd.targetNamespace="https://resources.infrastructurebuilder.org/IBAuditorResults/${apiVersion}"
+  java.suppressAllWarnings="false">
+
+  <!-- name must be a single (no spaces, no dashes, no periods) identifier
+    in order to create reader/writer -->
+  <name>AuditorResultsModel</name>
+  <description>Model for auditor result sets</description>
+  <defaults>
+    <default>
+      <key>package</key>
+      <value>${project.groupId}.auditor.model</value>
+    </default>
+  </defaults>
+
+  <classes>
+    <!-- MODEL -->
+    <class rootElement="true">
+      <name>AuditorResults</name>
+      <description>Encapsulator of all results from an audit report run, and their HTML table header.</description>
+      <version>1.0.0+</version>
+      <fields>
+        <field>
+          <name>name</name>
+          <description>The name of this audit report.</description>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <type>String</type>
+        </field>
+        <field>
+          <name>id</name>
+          <description>The unique identifier of this audit report.</description>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <type>String</type>
+          <defaultValue><![CDATA[" + java.util.UUID.randomUUID().toString() + "]]></defaultValue>
+        </field>
+        <field>
+          <name>timestampStart</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <description>The initial timestamp of this audit</description>
+          <type>Date</type>
+        </field>
+        <field>
+          <name>timestampEnd</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <description>The ending timestamp of this audit</description>
+          <type>Date</type>
+        </field>
+        <field>
+          <name>results</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <association>
+            <type>AuditResult</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+        <field>
+          <name>confidentialityStatement</name>
+          <description>An optional statement of confidentiality.</description>
+          <version>1.0.0+</version>
+          <required>false</required>
+          <type>String</type>
+        </field>
+        <field>
+          <name>introduction</name>
+          <description>An optional introductory statement.</description>
+          <version>1.0.0+</version>
+          <required>false</required>
+          <type>String</type>
+        </field>
+        <field>
+          <name>descriptionHeaders</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <association>
+            <type>String</type>
+            <multiplicity>*</multiplicity>
+          </association>
+          <description>
+            A List of Strings that is a 1-to-1 map of descriptions as provided
+            in an AuditResult. You can think of these as the column descriptions
+            in a table header.
+
+            An example might be:
+            List.of("Server", "Service", "Status");
+
+            An AuditResult would later provide values for a table row
+            underneath those columns, such as
+            List.of("Server1", "WebServiceX", "Stopped");
+          </description>
+        </field>
+      </fields>
+    </class>
+    <class>
+      <name>AuditResult</name>
+      <description>The result of a single audit check.</description>
+      <version>1.0.0+</version>
+      <fields>
+        <field>
+          <name>reported</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <description>
+            Should this result be included in the report?
+
+            Any check that would provide a false negative, or false positive,
+            in environments where that can be predicted (trust me, it happens)
+            should be skipped during a report.
+
+            If you do not need to skip any results when reporting, feel free
+            to set it to true all the time.
+          </description>
+          <type>boolean</type>
+        </field>
+        <field>
+          <name>timestampStart</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <description>The initial timestamp of this check</description>
+          <type>Date</type>
+        </field>
+        <field>
+          <name>timestampEnd</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <description>The ending timestamp of this check</description>
+          <type>Date</type>
+        </field>
+        <field>
+          <name>auditFailure</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <description>Does this result indicate audit failure?</description>
+          <type>boolean</type>
+        </field>
+        <field>
+          <name>errored</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <description>
+          If this result indicates failure, did it fail because of an error?
+
+          An example would be if an audit execution timed out, halting before
+          its checks were completed.
+
+          You can also think of it as the difference between a Maven build's successes,
+          failures, and errors, where this falls into the 'errors' category.
+
+          This value is not checked in cases where failsAudit is false.
+          </description>
+          <type>boolean</type>
+        </field>
+        <field>
+          <name>descriptions</name>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <type>List</type>
+          <association>
+            <type>String</type>
+            <multiplicity>*</multiplicity>
+          </association>
+          <description>
+            See descriptionHeaders in AuditResults.
+          </description>
+        </field>
+      </fields>
+    </class>
+    <class locationTracker="locations" java.clone="shallow">
+      <name>AuditorInputLocation</name>
+      <version>1.0.0+</version>
+      <fields>
+        <!-- line, column and source fields are auto-generated by Modello -->
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0+</version>
+          <code>
+            <![CDATA[
+  @Override public String toString() {return getLineNumber() + " : " + getColumnNumber() + ", " + getSource(); }
+            ]]>
+          </code>
+        </codeSegment>
+      </codeSegments>
+    </class>
+    <class sourceTracker="source" java.clone="shallow">
+      <name>AuditorInputSource</name>
+      <version>1.0.0+</version>
+      <!--
+      <fields>
+        <field>
+          <name>modelId</name>
+          <version>1.0.0+</version>
+          <type>String</type>
+          <description>The identifier of the model</description>
+        </field>
+        <field>
+          <name>location</name>
+          <version>1.0.0+</version>
+          <type>String</type>
+          <description>
+            <![CDATA[ The path/URL of the deployment model or {@code null} if unknown. ]]>
+          </description>
+        </field>
+      </fields>
+      <codeSegments>
+        <codeSegment>
+          <version>1.0.0+</version>
+          <code>
+            <![CDATA[  @Override public String toString(){ return getModelId() + " " + getLocation();}]]>
+          </code>
+        </codeSegment>
+      </codeSegments>
+       -->
+    </class>
+  </classes>
+</model>
