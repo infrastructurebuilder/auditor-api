@@ -11,18 +11,15 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License.
+ * limitations under the License. 
  */
 package org.infrastructurebuilder.auditor.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.StringWriter;
@@ -30,15 +27,12 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
-import java.util.UUID;
 
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
 import org.infrastructurebuilder.auditor.model.io.xpp3.AuditorResultsModelXpp3Reader;
 import org.infrastructurebuilder.auditor.model.io.xpp3.AuditorResultsModelXpp3ReaderEx;
 import org.infrastructurebuilder.auditor.model.io.xpp3.AuditorResultsModelXpp3Writer;
-import org.infrastructurebuilder.util.IBUtils;
 import org.infrastructurebuilder.util.config.TestingPathSupplier;
-import org.infrastructurebuilder.util.config.WorkingPathSupplier;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -66,7 +60,7 @@ public class AuditModelTests {
 
   @After
   public void teardown() {
-    wps.finalize();
+    // wps.finalize();
   }
 
   @Test
@@ -109,10 +103,12 @@ public class AuditModelTests {
     Path p = wps.get().resolve("temp.xml");
     resultsWriter.setFileComment("This is a test file!");
     try (OutputStream outs = Files.newOutputStream(p)) {
-      resultsWriter.write(outs, results);
+      AuditorResultsShell shell = new AuditorResultsShell();
+      shell.addAudit(results);
+      resultsWriter.write(outs, shell);
     }
     try (InputStream ins = Files.newInputStream(p, StandardOpenOption.READ)) {
-      AuditorResults fromRead = resultsReader.read(ins);
+      AuditorResults fromRead = resultsReader.read(ins).getAudits().get(0);
       fromRead.getResults().parallelStream().forEach(result -> {
         assertEquals("should have only one result header", 1, result.getDescriptions().size());
       });
@@ -132,7 +128,7 @@ public class AuditModelTests {
   public void confirmReads() throws Exception {
     // You still need to close your resources
     try (InputStream ins = Files.newInputStream(path)) {
-      AuditorResults results = resultsReader.read(ins);
+      AuditorResults results = resultsReader.read(ins).getAudits().get(0);
       assertEquals("Name should be Testing Audit", "Testing Audit", results.getName());
 
       int headers = results.getDescriptionHeaders().size();
@@ -159,24 +155,25 @@ public class AuditModelTests {
   public void testNonFileIO() throws Exception {
     StringWriter sw = new StringWriter();
     try (InputStream ins = Files.newInputStream(path)) {
-      AuditorResults fileResults = resultsReaderEx.read(ins, true, dsis);
-      resultsWriter.write(sw, fileResults);
+      AuditorResultsShell shell = new AuditorResultsShell();
+      shell.addAudit(resultsReaderEx.read(ins, true, dsis).getAudits().get(0));
+      resultsWriter.write(sw, shell);
       assertTrue(sw.toString().contains("audit"));
     }
-
   }
 
   @Test(expected = XmlPullParserException.class)
   public void confirmFail1() throws Exception {
     try (InputStream ins = Files.newInputStream(badPath1)) {
-      AuditorResults results = resultsReaderEx.read(ins, true, dsis);
+      resultsReaderEx.read(ins, true, dsis).getAudits().get(0);
       fail("This should not work");
     }
   }
+
   @Test(expected = XmlPullParserException.class)
   public void confirmFail2() throws Exception {
     try (InputStream ins = Files.newInputStream(badPath2)) {
-      AuditorResults results = resultsReaderEx.read(ins, true, dsis);
+      resultsReaderEx.read(ins, true, dsis).getAudits().get(0);
       fail("This should not work");
     }
   }

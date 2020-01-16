@@ -21,6 +21,23 @@
   <classes>
     <!-- MODEL -->
     <class rootElement="true">
+      <name>AuditorResultsShell</name>
+      <description>A shell holding a list of AuditorResults.</description>
+      <version>1.0.0+</version>
+      <fields>
+        <field>
+          <name>audits</name>
+          <description>the AuditorResults held by the shell.</description>
+          <version>1.0.0+</version>
+          <required>true</required>
+          <association>
+            <type>AuditorResults</type>
+            <multiplicity>*</multiplicity>
+          </association>
+        </field>
+      </fields>
+    </class>
+    <class>
       <name>AuditorResults</name>
       <description>Encapsulator of all results from an audit report run, and their HTML table header.</description>
       <version>1.0.0+</version>
