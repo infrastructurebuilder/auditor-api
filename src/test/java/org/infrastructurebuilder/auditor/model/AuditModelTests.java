@@ -60,7 +60,7 @@ public class AuditModelTests {
 
   @After
   public void teardown() {
-    // wps.finalize();
+    wps.finalize();
   }
 
   @Test
