@@ -211,32 +211,6 @@
     <class sourceTracker="source" java.clone="shallow">
       <name>AuditorInputSource</name>
       <version>1.0.0+</version>
-      <!--
-      <fields>
-        <field>
-          <name>modelId</name>
-          <version>1.0.0+</version>
-          <type>String</type>
-          <description>The identifier of the model</description>
-        </field>
-        <field>
-          <name>location</name>
-          <version>1.0.0+</version>
-          <type>String</type>
-          <description>
-            <![CDATA[ The path/URL of the deployment model or {@code null} if unknown. ]]>
-          </description>
-        </field>
-      </fields>
-      <codeSegments>
-        <codeSegment>
-          <version>1.0.0+</version>
-          <code>
-            <![CDATA[  @Override public String toString(){ return getModelId() + " " + getLocation();}]]>
-          </code>
-        </codeSegment>
-      </codeSegments>
-       -->
     </class>
   </classes>
 </model>
