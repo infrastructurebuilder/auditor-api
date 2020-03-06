@@ -23,12 +23,12 @@
     <version>29</version>
   </parent>
   <artifactId>auditor-api</artifactId>
-  <version>0.2.0</version>
+  <version>0.2.1-SNAPSHOT</version>
   <scm>
     <connection>scm:git:${git.url}</connection>
     <url>scm:git:${git.url}</url>
     <developerConnection>scm:git:${git.url}</developerConnection>
-    <tag>auditor-api-0.2.0</tag>
+    <tag>HEAD</tag>
   </scm>
 
   <properties>
