@@ -20,10 +20,10 @@
   <parent>
     <groupId>org.infrastructurebuilder</groupId>
     <artifactId>ibparent</artifactId>
-    <version>26</version>
+    <version>29</version>
   </parent>
   <artifactId>auditor-api</artifactId>
-  <version>0.1.1-SNAPSHOT</version>
+  <version>0.2.0-SNAPSHOT</version>
   <scm>
     <connection>scm:git:${git.url}</connection>
     <url>scm:git:${git.url}</url>
@@ -35,7 +35,7 @@
     <!-- This is being tracked as an issue: https://github.com/infrastructurebuilder/auditor-api/issues/1
       Note that the missed pieces are unused portions of the generated Xpp3Reader and generated model.
       The API and writer have 100% coverage. -->
-    <test.coverage.percentage.required>61</test.coverage.percentage.required>
+    <test.coverage.percentage.required>56</test.coverage.percentage.required>
   </properties>
   <dependencyManagement>
     <dependencies>
