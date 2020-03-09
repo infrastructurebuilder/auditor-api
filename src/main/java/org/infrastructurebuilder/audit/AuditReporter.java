@@ -13,12 +13,12 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.infrastructurebuilder.auditor;
+package org.infrastructurebuilder.audit;
 
 import java.util.List;
 import java.util.function.Supplier;
 
-import org.infrastructurebuilder.auditor.model.AuditorResults;
+import org.infrastructurebuilder.audit.auditor.model.AuditorResults;
 
 public interface AuditReporter extends Supplier<List<AuditorResults>> {
 }

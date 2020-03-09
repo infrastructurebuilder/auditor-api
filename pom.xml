@@ -24,7 +24,7 @@
   </parent>
   <groupId>org.infrastructurebuilder.audit</groupId>
   <artifactId>auditor-api</artifactId>
-  <version>0.2.1-SNAPSHOT</version>
+  <version>0.3.0-SNAPSHOT</version>
   <scm>
     <connection>scm:git:${git.url}</connection>
     <url>scm:git:${git.url}</url>
@@ -43,7 +43,7 @@
       <dependency>
         <groupId>org.infrastructurebuilder.util</groupId>
         <artifactId>ibcore-bom</artifactId>
-        <version>0.15.0.0</version>
+        <version>0.16.0.1</version>
         <type>pom</type>
         <scope>import</scope>
       </dependency>
@@ -132,10 +132,10 @@
         <groupId>org.jacoco</groupId>
         <artifactId>jacoco-maven-plugin</artifactId>
         <configuration>
+          <skip>true</skip> <!--  remove and retest reader/writer if any <codeSegment> items get added  -->
           <excludes>
-            <!-- There's literally nothign you can do about the reader and the writer. -->
-            <exclude>org/infrastructurebuilder/auditor/model/io/**/*</exclude>
-            <exclude>org/infrastructurebuilder/auditor/model/AuditorInput*</exclude>
+            <!-- nothing you can do about the reader and the writer. -->
+            <exclude>org/infrastructurebuilder/audit/auditor/model/**/*</exclude>
           </excludes>
         </configuration>
       </plugin>

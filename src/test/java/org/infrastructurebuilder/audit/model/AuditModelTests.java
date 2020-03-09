@@ -11,9 +11,9 @@
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
  * See the License for the specific language governing permissions and
- * limitations under the License. 
+ * limitations under the License.
  */
-package org.infrastructurebuilder.auditor.model;
+package org.infrastructurebuilder.audit.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
@@ -29,9 +29,13 @@ import java.nio.file.StandardOpenOption;
 import java.util.Arrays;
 
 import org.codehaus.plexus.util.xml.pull.XmlPullParserException;
-import org.infrastructurebuilder.auditor.model.io.xpp3.AuditorResultsModelXpp3Reader;
-import org.infrastructurebuilder.auditor.model.io.xpp3.AuditorResultsModelXpp3ReaderEx;
-import org.infrastructurebuilder.auditor.model.io.xpp3.AuditorResultsModelXpp3Writer;
+import org.infrastructurebuilder.audit.auditor.model.AuditResult;
+import org.infrastructurebuilder.audit.auditor.model.AuditorInputSource;
+import org.infrastructurebuilder.audit.auditor.model.AuditorResults;
+import org.infrastructurebuilder.audit.auditor.model.AuditorResultsShell;
+import org.infrastructurebuilder.audit.auditor.model.io.xpp3.AuditorResultsModelXpp3Reader;
+import org.infrastructurebuilder.audit.auditor.model.io.xpp3.AuditorResultsModelXpp3ReaderEx;
+import org.infrastructurebuilder.audit.auditor.model.io.xpp3.AuditorResultsModelXpp3Writer;
 import org.infrastructurebuilder.util.config.TestingPathSupplier;
 import org.junit.After;
 import org.junit.Before;
